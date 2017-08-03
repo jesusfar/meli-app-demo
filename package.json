@@ -6,6 +6,9 @@
   "repository": "git+https://github.com/jesusfar/meli-app-demo",
   "author": "Jesus Farfan <jesu.farfan23@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start:dev": "webpack-dev-server --hot --progress --host 0.0.0.0 --port 8000 --env.base=client"
+  },
   "dependencies": {
     "express": "^4.15.3",
     "muicss": "^0.9.20",
