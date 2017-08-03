@@ -1,0 +1,9 @@
+{
+  "name": "meli-app-demo",
+  "version": "0.0.1",
+  "description": "A PWA react base app demo for meli.",
+  "main": "index.js",
+  "repository": "git+https://github.com/jesusfar/meli-app-demo",
+  "author": "Jesus Farfan <jesu.farfan23@gmail.com>",
+  "license": "MIT"
+}
