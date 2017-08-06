@@ -1,0 +1,74 @@
+/////////////////////////////
+////// BASIC CONFIG  ////////
+/////////////////////////////
+
+// Primary colors App
+$colors: (
+    yelow: #FFE600,
+    grey-darken-2: #333333,
+    grey-darken-1: #666666,
+    grey-ligthen-1: #999999,
+    grey-ligthen-2: #EEEEEE,
+    blue: #3483FA,
+);
+
+// Break points size for responsive
+$breakpoints: (
+  xs: 512px,
+  sm: 768px,
+  md: 1252px,
+  lg: 1536px,
+  xl: 1632px,
+  xx: 1920px
+);
+
+// number of columns in page for grid system
+$grid-columns: 12;
+
+// Fonts
+$fontFamily: "Proxima Nova", Helvetica, Arial, sans-serif;
+
+// Fonts sizes
+$font-sizes: (
+  xs: calculateRem(14px),
+  sm: calculateRem(16px),
+  md: calculateRem(24px),
+  lg: calculateRem(28px),
+  xl: calculateRem(46px)
+);
+
+$default-browser-context: 16px;
+
+///////////////////////////////
+/// Common Mixin functions ////
+///////////////////////////////
+
+// MinWidth Break media query
+@mixin breakOnMinWidth($size) {
+  @if ($size == 0) {
+    @content;
+  } @else {
+    @media (min-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  }
+}
+
+// Max Width Break media query
+@mixin breakOnMaxWidth($size) {
+  @media (max-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+// Convert Pixels to Rem for spaces
+//http://engageinteractive.co.uk/blog/em-vs-rem-vs-px
+@function pixelToRem($pixels) {
+  $remSize: $pixels / $default-browser-context;
+  @return #{$remSize}rem;
+}
+
+@function pixelToEm($pixels) {
+  $emSize: $pixels / $default-browser-context;
+  @return #{$emSize}em;
+}

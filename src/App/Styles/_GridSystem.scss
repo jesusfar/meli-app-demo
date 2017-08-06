@@ -1,0 +1,42 @@
+/////////////////////////////
+/// BASIC FLUID GRID SYSTEM//
+/////////////////////////////
+
+@import "./_Base";
+
+// Container
+.container {
+  margin: 0 auto;
+  max-width: map-get($breakpoints, md);
+}
+
+// Fluid container
+.container-fluid {
+  width: 100%;
+  margin: 0;
+}
+
+// Row item
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+// Loop over the breakpoints
+@each $key, $size in $breakpoints {
+  @for $i from 1 through $grid-columns {
+    .col-#{$key}-#{$i} {
+      flex-basis: (100/ ($grid-columns/$i)) * 1%;
+      @include breakOnMinWidth($key) {
+        flex-basis: (100/ ($grid-columns/$i)) * 1%;
+      }
+    }
+    .col-offset-#{$key}-#{$i} {
+      margin-left: (100/ ($grid-columns/$i)) * 1%;
+      @include breakOnMinWidth($key) {
+        margin-left: (100/ ($grid-columns/$i)) * 1%;
+      }
+    }
+  }
+}

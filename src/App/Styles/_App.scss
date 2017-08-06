@@ -1,0 +1,9 @@
+@import "./_Base";
+
+body {
+  font-size: pixelToRem(16px);
+  font-family: $fontFamily;
+  line-height: 1.5;
+  margin: 0;
+  background-color: map-get($colors, grey-ligthen-2);
+}
