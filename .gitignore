@@ -1,3 +1,5 @@
 node_modules
 .npm
-logs
+css
+/build
+yarn-error.log

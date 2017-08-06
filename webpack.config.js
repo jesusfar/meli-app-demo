@@ -19,7 +19,7 @@ module.exports = ({ base }) => {
         devtool: isProd ? false : 'eval-source-map',
 
         entry: isClient
-            ? { client: path.join(__dirname, './src/app/index.jsx'), vendor: ['react', 'react-dom'] }
+            ? { client: path.join(__dirname, './src/App/index.jsx'), vendor: ['react', 'react-dom'] }
             : { server: path.join(__dirname, 'index.js') },
 
         output: {
@@ -38,44 +38,79 @@ module.exports = ({ base }) => {
         target: isClient ? 'web' : 'node',
 
         module: {
-            loaders: [{
+            loaders: [
+              {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 options: {
                     presets: [
-                        ['env', { 'targets': { 'browsers': ['last 2 versions']}}],
-                        'react',
-                        'stage-0'
+                      ['env', { 'targets': { 'browsers': ['last 2 versions']}}],
+                      'react',
+                      'stage-0'
                     ]
                 }
-            }, {
+              },
+              {
+                test: /\.(png|jpg)$/i,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {
+                      query: {
+                        hash: 'sha512',
+                        digest: 'hex',
+                        name: '[hash].[ext]'
+                      }
+                    }
+                  },
+                  {
+                    loader: 'image-webpack-loader',
+                    options: {
+                      query: {
+                        mozjpeg: {
+                          progressive: true,
+                        },
+                        gifsicle: {
+                          interlaced: true,
+                        },
+                        optipng: {
+                          optimizationLevel: 7,
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
                 test: /\.(scss|sass)$/,
                 use: isClient
-                    ? [
-                        { loader: 'style-loader' },
-                        {
-                            loader: 'css-loader',
-                            options:
-                            {
-                                modules: true,
-                                localIdentName: '[name]--[local]--[hash:base64:5]'
-                            }
-                        },
-                        { loader: 'sass-loader' }
-                    ]
-                    : [
-                        {
-                            loader: 'css-loader/locals',
-                            options:
-                            {
-                                modules: true,
-                                localIdentName: '[name]--[local]--[hash:base64:5]'
-                            }
-                        },
-                        { loader: 'sass-loader' }
-                    ]
-            }]
+                ? [
+                    { loader: 'style-loader' },
+                    {
+                      loader: 'css-loader',
+                      options:
+                      {
+                          modules: true,
+                          localIdentName: '[name]--[local]--[hash:base64:5]'
+                      }
+                    },
+                    { loader: 'resolve-url-loader' },
+                    { loader: 'sass-loader' }
+                ]
+                : [
+                    {
+                      loader: 'css-loader/locals',
+                      options:
+                      {
+                          modules: true,
+                          localIdentName: '[name]--[local]--[hash:base64:5]'
+                      }
+                    },
+                    { loader: 'sass-loader' }
+                ]
+            }
+          ]
         },
 
         devServer: {
@@ -91,7 +126,7 @@ module.exports = ({ base }) => {
                 'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
             }),
             new FaviconsWebpackPlugin({
-                logo: './src/app/assets/images/favicon.png',
+                logo: './src/App/Assets/images/favicon.png',
                 prefix: 'icons-[hash]/',
                 emitStats: true,
                 persisentCache: true,
@@ -99,7 +134,7 @@ module.exports = ({ base }) => {
                 inject: true
             }),
             new HtmlWebpackPlugin({
-                template: 'src/app/index.html',
+                template: 'src/App/index.html',
                 inject: 'body',
                 filename: 'index.html'
             }),
