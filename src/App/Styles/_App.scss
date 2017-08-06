@@ -7,3 +7,7 @@ body {
   margin: 0;
   background-color: map-get($colors, grey-ligthen-2);
 }
+
+main {
+  padding-top: pixelToRem(55px);
+}

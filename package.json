@@ -10,6 +10,7 @@
     "start:dev": "webpack-dev-server --hot --progress --host 0.0.0.0 --port 8000 --env.base=client"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "express": "^4.15.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

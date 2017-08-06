@@ -1,10 +1,12 @@
+@import "./../App/Styles/_Base";
+
 @mixin search-input () {
-  font-size: 18px;
-  border-radius: 5px 0 0 5px;
+  font-size: pixelToRem(18px);
+  border-radius: pixelToRem(5px) 0 0 pixelToRem(5px);
   border: 0;
-  line-height: 35px;
+  line-height: pixelToRem(35px);
   box-sizing: border-box;
-  padding-left: 15px;
+  padding-left: pixelToRem(15px);
 }
 
 @mixin search-icon () {
@@ -15,26 +17,26 @@
 }
 
 form.searchbox {
-  border-radius: 3px;
+  border-radius: pixelToRem(3px);
   position: absolute;
-  left: 256px;
-  margin-top: 8px;
+  left: pixelToRem(256px);
+  margin-top: pixelToRem(8px);
 
   input {
     @include search-input();
-    width: 850px;
+    width: pixelToRem(850px);
   }
 
   button {
     float: right;
-    padding: 10px;
+    padding: pixelToRem(10px);
     border: 0;
-    background-color: #EEEEEE;
+    background-color: map-get($colors, grey-ligthen-2);
     text-align: center;
     i {
       @include search-icon();
-      width: 18px;
-      height: 18px;
+      width: pixelToRem(18px);
+      height: pixelToRem(18px);
       margin: 0 auto;
     }
   }
