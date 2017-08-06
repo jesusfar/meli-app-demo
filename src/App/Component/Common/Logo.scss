@@ -1,0 +1,17 @@
+@import "./../../Styles/_Base";
+
+// Meli Logo
+@mixin meliLogo ($height) {
+  background-image: url('./../../Assets/images/Logo_ML.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  overflow: hidden;
+  height: pixelToRem($height);
+}
+
+.logo {
+  @include meliLogo(45px);
+  top: pixelToRem(10px);
+  left: pixelToRem(180px);
+  color: transparent;
+}

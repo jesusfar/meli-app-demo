@@ -1,0 +1,8 @@
+@import "./../../Styles/_Base";
+
+header.header {
+  background-color: map-get($colors, yelow);
+  width: 100%;
+  height: pixelToRem(54px);
+  position: fixed;
+}
