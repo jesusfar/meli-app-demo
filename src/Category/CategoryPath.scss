@@ -1,0 +1,22 @@
+@import "./../App/Styles/_Base";
+@import "./../App/Styles/_GridSystem";
+
+section.category-path {
+  padding-top: pixelToRem(16px);
+  padding-bottom: pixelToRem(16px);
+
+  nav {
+    ol {
+      li {
+        display: inline;
+        color: black;
+        font-size: 16px;
+
+        a {
+          text-decoration: none;
+          color: blue;
+        }
+      }
+    }
+  }
+}
