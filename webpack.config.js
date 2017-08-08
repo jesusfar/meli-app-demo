@@ -19,7 +19,7 @@ module.exports = ({ base }) => {
         devtool: isProd ? false : 'eval-source-map',
 
         entry: isClient
-            ? { client: path.join(__dirname, './src/App/index.jsx'), vendor: ['react', 'react-dom'] }
+            ? { client: path.join(__dirname, './src/app/index.jsx'), vendor: ['react', 'react-dom'] }
             : { server: path.join(__dirname, 'index.js') },
 
         output: {
@@ -126,7 +126,7 @@ module.exports = ({ base }) => {
                 'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
             }),
             new FaviconsWebpackPlugin({
-                logo: './src/App/Assets/images/favicon.png',
+                logo: './src/app/assets/images/favicon.png',
                 prefix: 'icons-[hash]/',
                 emitStats: true,
                 persisentCache: true,
@@ -134,7 +134,7 @@ module.exports = ({ base }) => {
                 inject: true
             }),
             new HtmlWebpackPlugin({
-                template: 'src/App/index.html',
+                template: 'src/app/index.html',
                 inject: 'body',
                 filename: 'index.html'
             }),

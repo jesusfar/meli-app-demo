@@ -1,12 +1,11 @@
 import React from 'react';
-
 import { BrowserRoute, Route, Switch } from 'react-router-dom';
 
-import Header from './Component/Header/Header';
-import Home from './Component/Home/Home';
-import ItemList from './../Item/ItemList';
-import ItemDetail from './../Item/ItemDetail';
-import styleApp from './Styles/_App.scss';
+import Header from './components/header/Header';
+import Home from './components/home/Home';
+import ItemList from './../item/ItemList';
+import ItemDetail from './../item/ItemDetail';
+import styleApp from './styles/_App.scss';
 
 const routes = [
   {

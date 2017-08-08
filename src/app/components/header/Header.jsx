@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Logo from './../Common/Logo';
-import SearchBox from './../../../SearchBox/SearchBox';
+import Logo from './../common/Logo';
+import SearchBox from './../search-box/SearchBox';
 
 import styleHeader from './Header.scss';
 

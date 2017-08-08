@@ -1,4 +1,4 @@
-@import "./../App/Styles/_Base";
+@import "./../../styles/_Base";
 
 @mixin search-input () {
   font-size: pixelToRem(18px);
@@ -10,7 +10,7 @@
 }
 
 @mixin search-icon () {
-  background-image: url('./../App/Assets/images/ic_Search.png');
+  background-image: url('./../../assets/images/ic_Search.png');
   display: block;
   box-sizing: border-box;
   background-repeat: no-repeat;
