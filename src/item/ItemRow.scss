@@ -1,0 +1,10 @@
+@import "./../app/styles/_Base";
+@import "./../app/styles/_GridSystem";
+
+.item-picture {
+  img {
+    width: 180px;
+    height: 180px;
+    border-radius: 4px;
+  }
+}

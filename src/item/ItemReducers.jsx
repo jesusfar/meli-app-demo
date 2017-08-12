@@ -4,36 +4,35 @@ import {
   FETCH_ITEMS_FAILS,
   FETCH_ITEM,
   FETCH_ITEM_SUCCESS,
-  FETCH_ITEM_FAILS
+  FETCH_ITEM_FAILS,
+  SEARCH_ITEMS_REQUESTED
 } from './ItemActions';
 
-const initialState = {
-  items: []
+export const initialState = {
+  items: [],
+  categories: []
 }
 
 export function itemListReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_ITEMS:
-      return state;
+    case SEARCH_ITEMS_REQUESTED:
+      return {
+        ...state,
+        fetchInProcess: true
+      };
     case FETCH_ITEMS_SUCCESS:
-      return state;
+      return {
+        ...state,
+        items: action.payload.items,
+        categories: action.payload.categories
+      }
     case FETCH_ITEMS_FAILS:
-      return state;
-    case FETCH_ITEM:
-      return Object.assign({}, state, {
-        items: [
-          {
-            id: 'MLA234'
-          },
-          {
-            id: 'MLAS2323'
-          }
-        ]
-      });
-    case FETCH_ITEM_SUCCESS:
-      return state;
-    case FETCH_ITEM_FAILS:
-      return state;
+      return {
+        ...state,
+        items: [],
+        categories: [],
+        error: 'Failed in fetch items'
+      };
     default:
       return state;
   }

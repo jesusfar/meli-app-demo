@@ -1,17 +1,32 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
+
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { createLogger } from 'redux-logger';
+import {  ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
 import App from './App';
-import appReducers from './reducers';
+import reducers from './reducers';
+import meliApiService from './services/MeliApiService';
 
-let store = createStore(appReducers);
+// Create History browser
+const history = createHistory();
+
+// Middleware for intercepting and dispatching navigation actions
+const middleware = routerMiddleware(history);
+const loggerMiddleware = createLogger();
+
+// Add the reducers and apply middlewares
+const store = createStore(reducers, {}, applyMiddleware(meliApiService, middleware, loggerMiddleware));
 
 const Index = () => (
-  <BrowserRouter>
-    <App store={store} />
-  </BrowserRouter>
+  <Provider store={store}>
+    <ConnectedRouter history={ history }>
+      <App />
+    </ConnectedRouter>
+  </Provider>
 );
 
 render(<Index/>, document.getElementById('root'));

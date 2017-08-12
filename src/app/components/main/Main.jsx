@@ -1,42 +1,83 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import PropTypes from 'prop-types';
 
 import Home from './../home/Home';
-import ItemContainer from './../../../item/ItemContainer';
+import Header from './../header/Header';
+import ItemListContainer from './../../../item/ItemListContainer';
 import ItemDetail from './../../../item/ItemDetail';
 import styleApp from './../../styles/_App.scss';
 
-const routes = [
-  {
-    path: '/',
-    exact: true,
-    main: Home
-  },
-  {
-    path: '/items',
-    main: ItemContainer
-  },
-  {
-    path: '/items/:itemId',
-    main: ItemDetail
+import { searchItemsRequested } from './../../../item/ItemActions';
+
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+
+    //Initial state searchText
+    this.state = {
+      searchText: ''
+    }
   }
-];
 
-const Main = () => (
-  <div className={ styleApp.main } >
-    <Switch>
-    {routes.map((route, index) => (
-      // You can render a <Route> in as many places
-      // as you want in your app.
-      <Route
-        key={index}
-        path={route.path}
-        exact={route.exact}
-        component={route.main}
-      />
-    ))}
-    </Switch>
-  </div>
-)
+  handleSearchTextInput(searchText) {
+    this.setState({
+      searchText: searchText
+    });
+  }
 
-export default Main;
+  handleOnSearchSubmit(e) {
+    e.preventDefault();
+
+    if (this.state.searchText) {
+      this.props.setUri(this.state.searchText);
+      this.props.searchItems(this.state.searchText);
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <Header
+          searchText={ this.state.searchText }
+          onSearchTextInput={ this.handleSearchTextInput.bind(this) }
+          onSearchSubmit={ this.handleOnSearchSubmit.bind(this) }
+        />
+        <div className={ styleApp.main } >
+          <Route exact path='/' component={ Home }/>
+          <Route exact path='/items' render={ (props) =>
+            <ItemListContainer
+              items={ this.props.items } categories={ this.props.categories } {...props}
+            />
+          }/>
+          <Route exact path='/items/:itemId' component={ ItemDetail }/>
+        </div>
+      </div>
+    );
+  }
+}
+
+Main.propTypes = {
+  setUri: PropTypes.func,
+  searchItems: PropTypes.func,
+  items: PropTypes.arrayOf(PropTypes.object)
+}
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.itemListReducer.items,
+    categories: state.itemListReducer.categories
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUri: (searchText) => dispatch(push('/items?search=' + searchText)),
+    searchItems: (searchText) => dispatch(searchItemsRequested(searchText))
+  }
+}
+
+const MainConnected = connect(mapStateToProps, mapDispatchToProps)(Main);
+export default MainConnected;
