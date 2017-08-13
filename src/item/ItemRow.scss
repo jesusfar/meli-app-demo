@@ -1,0 +1,24 @@
+@import "./../app/styles/_Base";
+@import "./../app/styles/_GridSystem";
+
+.item-picture {
+  img {
+    width: 180px;
+    height: 180px;
+    border-radius: 4px;
+  }
+}
+
+.item-short-description {
+  h2 {
+    font-size: map-get($font-sizes, md);
+  }
+  p {
+    font-size: map-get($font-sizes, sm);
+  }
+}
+
+address {
+  font-size: map-get($font-sizes, xs);
+  font-style: normal;
+}

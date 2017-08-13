@@ -30,11 +30,11 @@ $fontFamily: "Proxima Nova", Helvetica, Arial, sans-serif;
 
 // Fonts sizes
 $font-sizes: (
-  xs: calculateRem(14px),
-  sm: calculateRem(16px),
-  md: calculateRem(24px),
-  lg: calculateRem(28px),
-  xl: calculateRem(46px)
+  xs: pixelToRem(14px),
+  sm: pixelToRem(16px),
+  md: pixelToRem(24px),
+  lg: pixelToRem(28px),
+  xl: pixelToRem(46px)
 );
 
 $default-browser-context: 16px;
@@ -71,4 +71,14 @@ $default-browser-context: 16px;
 @function pixelToEm($pixels) {
   $emSize: $pixels / $default-browser-context;
   @return #{$emSize}em;
+}
+
+@mixin primary-button () {
+  background-color: map-get($colors, blue);
+  display: inline-block;
+  padding: pixelToRem(12px) pixelToRem(24px);
+  border: pixelToRem(1px) solid;
+  border-color: map-get($colors, blue);
+  border-radius: pixelToRem(3px);
+  color: white;
 }

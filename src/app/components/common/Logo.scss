@@ -1,8 +1,8 @@
-@import "./../../Styles/_Base";
+@import "./../../styles/_Base";
 
 // Meli Logo
 @mixin meliLogo ($height) {
-  background-image: url('./../../Assets/images/Logo_ML.png');
+  background-image: url('./../../assets/images/Logo_ML.png');
   background-repeat: no-repeat;
   position: absolute;
   overflow: hidden;
