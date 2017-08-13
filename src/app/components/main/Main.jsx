@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 import Home from './../home/Home';
 import Header from './../header/Header';
 import ItemListContainer from './../../../item/ItemListContainer';
-import ItemDetail from './../../../item/ItemDetail';
+import ItemDetailContainer from './../../../item/ItemDetailContainer';
+import CategoryPath from './../../../category/CategoryPath';
 import styleApp from './../../styles/_App.scss';
 
 import { searchItemsRequested } from './../../../item/ItemActions';
@@ -46,13 +47,14 @@ class Main extends React.Component {
           onSearchSubmit={ this.handleOnSearchSubmit.bind(this) }
         />
         <div className={ styleApp.main } >
+          <CategoryPath categories={ this.props.categories } />
           <Route exact path='/' component={ Home }/>
           <Route exact path='/items' render={ (props) =>
             <ItemListContainer
-              items={ this.props.items } categories={ this.props.categories } {...props}
+              items={ this.props.items } {...props}
             />
           }/>
-          <Route exact path='/items/:itemId' component={ ItemDetail }/>
+          <Route exact path='/items/:itemId' component={ ItemDetailContainer }/>
         </div>
       </div>
     );
@@ -62,7 +64,8 @@ class Main extends React.Component {
 Main.propTypes = {
   setUri: PropTypes.func,
   searchItems: PropTypes.func,
-  items: PropTypes.arrayOf(PropTypes.object)
+  items: PropTypes.arrayOf(PropTypes.object),
+  categories: PropTypes.arrayOf(PropTypes.string)
 }
 
 const mapStateToProps = (state) => {

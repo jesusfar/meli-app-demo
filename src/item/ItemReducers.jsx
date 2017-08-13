@@ -10,7 +10,8 @@ import {
 
 export const initialState = {
   items: [],
-  categories: []
+  categories: [],
+  item: null
 }
 
 export function itemListReducer(state = initialState, action) {
@@ -31,7 +32,23 @@ export function itemListReducer(state = initialState, action) {
         ...state,
         items: [],
         categories: [],
-        error: 'Failed in fetch items'
+        error: 'Failed in fetch items.'
+      };
+    case FETCH_ITEM:
+      return {
+        ...state,
+        fetchInProcess: true
+      };
+    case FETCH_ITEM_SUCCESS:
+      return {
+        ...state,
+        item: action.payload.item
+      };
+    case FETCH_ITEM_FAILS:
+      return {
+        ...state,
+        item: null,
+        error: 'Failed in fetch item.'
       };
     default:
       return state;

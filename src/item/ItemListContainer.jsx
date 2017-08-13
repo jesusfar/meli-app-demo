@@ -18,8 +18,8 @@ class ItemListContainer extends React.Component {
     // I verify if query params are present
     if (this.props.location.search) {
       const queryParams = queryString.parse(this.props.location.search);
+      // If search param is present I have to search item based on query
       if (queryParams.search) {
-        console.log('If searchText is present I have to get items', queryParams.search);
         this.props.searchItems(queryParams.search);
       }
     }
@@ -28,7 +28,6 @@ class ItemListContainer extends React.Component {
   render() {
     return (
       <div>
-        <CategoryPath categories={ this.props.categories } />
         <ItemList items={ this.props.items } />
       </div>
     )
@@ -36,13 +35,11 @@ class ItemListContainer extends React.Component {
 }
 
 ItemListContainer.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
-  categories: PropTypes.arrayOf(PropTypes.string)
+  items: PropTypes.arrayOf(PropTypes.object)
 }
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.itemListReducer.categories,
     items: state.itemListReducer.items
   }
 }

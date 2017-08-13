@@ -18,7 +18,7 @@ class ItemList extends React.Component {
     return (
       <section>
         {this.props.items.map(item => (
-          <ItemRow key={ item.id } item={item} />
+          <ItemRow key={ item.id } item={ item } />
         ))}
       </section>
     )

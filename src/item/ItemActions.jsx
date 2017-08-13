@@ -46,29 +46,30 @@ export function fetchItemsFails(error) {
 }
 
 
-export function fetchItem() {
+export function fetchItem(itemId) {
   return {
-    type: FETCH_ITEMS,
+    type: FETCH_ITEM,
     payload: {
-      text: 'Fetch item by id.'
+      itemId: itemId
     }
   }
 }
 
-export function fetchItemSuccess() {
+export function fetchItemSuccess(data) {
   return {
     type: FETCH_ITEM_SUCCESS,
     payload: {
-      text: 'Fetch item by id success.'
+      item: data.item
     }
   }
 }
 
-export function fetchItemFails() {
+export function fetchItemFails(error) {
   return {
     type: FETCH_ITEM_FAILS,
     payload: {
-      text: 'Fetch item failed.'
+      error: error,
+      item: null
     }
   }
 }

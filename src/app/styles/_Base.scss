@@ -72,3 +72,13 @@ $default-browser-context: 16px;
   $emSize: $pixels / $default-browser-context;
   @return #{$emSize}em;
 }
+
+@mixin primary-button () {
+  background-color: map-get($colors, blue);
+  display: inline-block;
+  padding: pixelToRem(12px) pixelToRem(24px);
+  border: pixelToRem(1px) solid;
+  border-color: map-get($colors, blue);
+  border-radius: pixelToRem(3px);
+  color: white;
+}

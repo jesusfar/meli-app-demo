@@ -1,0 +1,54 @@
+@import "./../app/styles/_Base";
+@import "./../app/styles/_GridSystem";
+
+.item-details-container {
+  background-color: #FFF;
+}
+
+.item-picture {
+  img: {
+    width: pixelToRem(680px);
+  }
+}
+
+.item-short-description {
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  padding: 32px;
+  vertical-align: baseline;
+}
+
+.item-conditions {
+  font-size: map-get($font-sizes, xs);
+  margin-bottom: pixelToRem(16px);
+}
+
+.item-title {
+  font-size: map-get($font-sizes, md);
+  margin-bottom: pixelToRem(32px);
+}
+
+.item-price {
+  font-size: map-get($font-sizes, lg);
+  margin-bottom: pixelToRem(32px);
+}
+
+.buy-action-button {
+  @include primary-button();
+
+  padding-left: pixelToRem(62px);
+  padding-right: pixelToRem(62px);
+  line-height: pixelToRem(10px);
+  width: pixelToRem(250px);
+}
+
+.item-description {
+  padding-left: pixelToRem(32px);
+  h2 {
+    font-size: map-get($font-sizes, lg);
+  }
+  p {
+    font-size: map-get($font-sizes, sm);
+  }
+}

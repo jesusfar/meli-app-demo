@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
@@ -11,18 +12,23 @@ class ItemRow extends React.Component {
   render() {
     let classNameItem = cx('row');
     let classNameFigure = cx('col-md-2', 'col-offset-md-1');
-    let classNameSection = cx('col-md-6');
+    let classNameShortDescription = cx('col-md-6', 'item-short-description');
     let classNamePicture = cx('item-picture');
+
+    let item = this.props.item;
 
     return (
       <div className={ classNameItem }>
         <figure className={ classNameFigure }>
-          <a className={ classNamePicture } href='/items/MLSA-123'>
-            <img src={ this.props.item.picture }/>
+          <a className={ classNamePicture } href={ `/items/${item.id}` }>
+            <img src={ item.picture }/>
           </a>
         </figure>
-        <section className={ classNameSection }>
-          <h2>$ { this.props.item.price.amount }</h2>
+        <section className={ classNameShortDescription }>
+          <h2>$ { item.price.amount }</h2>
+          <p>
+            { item.title }
+          </p>
         </section>
         <address>Capital Federal</address>
       </div>
