@@ -13,4 +13,8 @@
       font-size: map-get($font-sizes, xs);
     }
   }
+
+  @media (max-width: map-get($breakpoints, xs)) {
+    display: none;
+  }
 }

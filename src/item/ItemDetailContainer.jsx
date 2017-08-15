@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import ItemDetail from './ItemDetail';
 import { fetchItem } from './ItemActions';
+import ResourceNotFound from './../app/components/common/ResourceNotFound';
+import ServiceUnavailable from './../app/components/common/ServiceUnavailable';
 
 class ItemDetailContainer extends React.Component {
   constructor(props) {
@@ -13,19 +15,35 @@ class ItemDetailContainer extends React.Component {
   componentWillMount() {
     // I verify if query params are present
     if (this.props.match.params.itemId) {
-      console.log('I have to fetch Item', this.props.match.params.itemId);
       this.props.fetchItem(this.props.match.params.itemId);
     }
   }
 
   render() {
     let item = this.props.item;
+    let error = this.props.error;
+
     if (item !== null) {
     return (
       <div>
         <ItemDetail item={ item } />
       </div>
     )
+    } else if (error != null) {
+      switch (error.code) {
+        case 404:
+          return (
+            <div>
+              <ResourceNotFound />
+            </div>
+          );
+        default:
+          return (
+            <div>
+              <ServiceUnavailable />
+            </div>
+          );
+      }
     } else {
       return (
         <div>
@@ -36,12 +54,14 @@ class ItemDetailContainer extends React.Component {
 }
 
 ItemDetailContainer.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
+  error: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
-    item: state.itemListReducer.item
+    item: state.itemListReducer.item,
+    error: state.itemListReducer.error
   }
 }
 

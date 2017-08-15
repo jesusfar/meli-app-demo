@@ -15,18 +15,22 @@ class ItemList extends React.Component {
 
   render() {
     let classNameSection = cx('row');
+    let classNameItemsContainer = cx('item-row-container', 'col-offset-md-1', 'col-md-10', 'col-sm-12', 'col-xs-12')
     return (
-      <section>
-        {this.props.items.map(item => (
-          <ItemRow key={ item.id } item={ item } />
-        ))}
+      <section className={ classNameSection }>
+        <div className={ classNameItemsContainer }>
+          {this.props.items.map(item => (
+              <ItemRow key={ item.id } item={ item } onItemClick={ this.props.onItemClick }/>
+          ))}
+        </div>
       </section>
     )
   }
 }
 
 ItemList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object)
+  items: PropTypes.arrayOf(PropTypes.object),
+  onItemClick: PropTypes.func
 }
 
 export default ItemList;

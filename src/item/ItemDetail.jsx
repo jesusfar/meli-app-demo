@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import {IntlProvider, FormattedNumber} from 'react-intl';
 
 import styleItemDetail from './ItemDetail.scss';
 
@@ -15,7 +16,7 @@ class ItemDetail extends React.Component {
     let item = this.props.item;
 
     let classNameRow = cx('row');
-    let classNameItemDetailContainer = cx('item-details-container', 'col-offset-md-1', 'col-md-10');
+    let classNameItemDetailContainer = cx('item-details-container', 'col-offset-md-1', 'col-md-10', 'col-sm-12', 'col-xs-12');
     let classNameItemPicture = cx('item-picture', 'col-md-7');
     let classNameShortDescription = cx('item-short-description', 'col-md-3');
     let classNameItemConditions = cx('item-conditions');
@@ -32,13 +33,13 @@ class ItemDetail extends React.Component {
             </figure>
             <section className={ classNameShortDescription }>
               <div className={ classNameItemConditions }>
-                { item.condition } - { item.sold_quantity } Vendidos
+                { item.condition } - { item.sold_quantity } vendidos
               </div>
               <div className={ classNameItemTitle }>
                 { item.title }
               </div>
               <div className={ classNameItemPrice }>
-                ${ item.price.amount }
+                <FormattedNumber value={ item.price.amount } style="currency" currency={ item.price.currency } />
               </div>
               <div>
                 <button className={ classNameBuyButton } type="submit">

@@ -1,24 +1,49 @@
 @import "./../app/styles/_Base";
 @import "./../app/styles/_GridSystem";
 
+.item-row {
+  border-bottom: pixelToRem(1px) map-get($colors, grey-ligthen-2) solid;
+}
+
+.item-clickeable {
+  text-decoration: none;
+}
+
 .item-picture {
   img {
-    width: 180px;
-    height: 180px;
+    width: pixelToRem(180px);
+    height: pixelToRem(180px);
     border-radius: 4px;
   }
 }
 
 .item-short-description {
-  h2 {
+  h4 {
     font-size: map-get($font-sizes, md);
+    color: map-get($colors, grey-darken-2);
   }
   p {
     font-size: map-get($font-sizes, sm);
+    color: map-get($colors, grey-darken-2);
+  }
+
+  @media (max-width: map-get($breakpoints, xs)) {
+    h4 {
+      padding-left: pixelToRem(25px);
+    }
+    p {
+      padding-left: pixelToRem(25px);
+    }
   }
 }
 
 address {
   font-size: map-get($font-sizes, xs);
   font-style: normal;
+  color: map-get($colors, grey-darken-1);
+  padding-top: pixelToRem(32px);
+
+  @media (max-width: map-get($breakpoints, xs)) {
+    display: none;
+  }
 }

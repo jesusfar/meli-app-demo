@@ -11,7 +11,8 @@ import {
 export const initialState = {
   items: [],
   categories: [],
-  item: null
+  item: null,
+  error: null
 }
 
 export function itemListReducer(state = initialState, action) {
@@ -32,7 +33,9 @@ export function itemListReducer(state = initialState, action) {
         ...state,
         items: [],
         categories: [],
-        error: 'Failed in fetch items.'
+        error: {
+          code: getErrorCodeFrom(action.payload)
+        }
       };
     case FETCH_ITEM:
       return {
@@ -48,11 +51,18 @@ export function itemListReducer(state = initialState, action) {
       return {
         ...state,
         item: null,
-        error: 'Failed in fetch item.'
+        error: {
+          code: getErrorCodeFrom(action.payload)
+        }
       };
     default:
       return state;
   }
+}
+
+function getErrorCodeFrom(payload) {
+  let errorCode = (typeof payload.error.response == 'undefined') ? -1 : payload.error.response.status;
+  return errorCode;
 }
 
 

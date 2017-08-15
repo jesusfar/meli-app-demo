@@ -6,8 +6,16 @@
 }
 
 .item-picture {
-  img: {
-    width: pixelToRem(680px);
+  @media (max-width: map-get($breakpoints, xs)) {
+    img {
+      width: 200px;
+    }
+  }
+
+  @media (min-width: map-get($breakpoints, md)) {
+    img {
+      width: 680px;
+    }
   }
 }
 
@@ -50,5 +58,14 @@
   }
   p {
     font-size: map-get($font-sizes, sm);
+  }
+
+  @media (max-width: map-get($breakpoints, xs)) {
+    h2 {
+      font-size: map-get($font-sizes, xs);
+    }
+    p {
+      font-size: map-get($font-sizes, xs);
+    }
   }
 }

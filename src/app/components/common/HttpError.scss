@@ -1,0 +1,23 @@
+@import "./../../styles/_Base";
+
+.error {
+  vertical-align: middle;
+  padding: 0 pixelToRem(20px);
+  text-align: center;
+  h1 {
+    font-weight: 500;
+    font-size: pixelToRem(36px);
+    color: inherit;
+    color: map-get($colors, grey-darken-1);
+    small {
+      font-size: 68%;
+      font-weight: 400;
+      color: map-get($colors, blue);
+    }
+  }
+
+  p {
+    font-size: 21px;
+    color: map-get($colors, grey-darken-1);
+  }
+}
