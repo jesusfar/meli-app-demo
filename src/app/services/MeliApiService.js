@@ -8,13 +8,16 @@ import {
 } from './../../item/ItemActions';
 
 import axios from 'axios';
+import { config } from './../config/Config';
+
+const baseUrl = config.services.meliApi.baseUrl;
 
 const meliApiService = store => next => action => {
   next(action);
   switch (action.type) {
     case SEARCH_ITEMS_REQUESTED:
-      axios.get('http://127.0.0.1:3000/api/items?q=' + action.payload.query)
-        .then(function (response) {
+      axios.get(baseUrl + '/items?q=' + action.payload.query)
+        .then((response) => {
           next(fetchItemsSuccess(response.data));
         })
         .catch(function (error) {
@@ -22,7 +25,7 @@ const meliApiService = store => next => action => {
         });
         break;
     case FETCH_ITEM:
-      axios.get('http://127.0.0.1:3000/api/items/' + action.payload.itemId)
+      axios.get(baseUrl + '/items/' + action.payload.itemId)
         .then((response) => {
           next(fetchItemSuccess(response.data));
         })

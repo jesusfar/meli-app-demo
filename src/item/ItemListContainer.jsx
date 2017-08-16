@@ -7,6 +7,7 @@ import { push } from 'react-router-redux';
 import ItemList from './ItemList';
 import CategoryPath from './../category/CategoryPath';
 import { searchItemsRequested } from './ItemActions';
+import ServiceUnavailable from './../app/components/common/ServiceUnavailable';
 
 class ItemListContainer extends React.Component {
 
@@ -26,21 +27,32 @@ class ItemListContainer extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <ItemList items={ this.props.items } />
-      </div>
-    )
+    if (this.props.error !== null) {
+      return (
+        <div>
+          <ServiceUnavailable />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <ItemList items={ this.props.items } onItemClick={ this.props.onItemClick } />
+        </div>
+      );
+    }
   }
 }
 
 ItemListContainer.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object)
+  items: PropTypes.arrayOf(PropTypes.object),
+  error: PropTypes.object,
+  onItemClick: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
   return {
-    items: state.itemListReducer.items
+    items: state.itemListReducer.items,
+    error: state.itemListReducer.error
   }
 }
 

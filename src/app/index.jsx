@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import {  ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+import { IntlProvider } from 'react-intl';
 
 import App from './App';
 import reducers from './reducers';
@@ -22,11 +23,13 @@ const loggerMiddleware = createLogger();
 const store = createStore(reducers, {}, applyMiddleware(meliApiService, middleware, loggerMiddleware));
 
 const Index = () => (
-  <Provider store={store}>
-    <ConnectedRouter history={ history }>
-      <App />
-    </ConnectedRouter>
-  </Provider>
+  <IntlProvider locale={navigator.language}>
+    <Provider store={store}>
+      <ConnectedRouter history={ history }>
+          <App />
+      </ConnectedRouter>
+    </Provider>
+  </IntlProvider>
 );
 
 render(<Index/>, document.getElementById('root'));

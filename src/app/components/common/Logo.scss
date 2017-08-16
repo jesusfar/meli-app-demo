@@ -14,4 +14,7 @@
   top: pixelToRem(10px);
   left: pixelToRem(180px);
   color: transparent;
+  @media (max-width: map-get($breakpoints, xs)) {
+    left: pixelToRem(15px);
+  }
 }
