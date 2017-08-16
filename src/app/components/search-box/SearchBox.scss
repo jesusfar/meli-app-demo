@@ -40,4 +40,11 @@ form.searchbox {
       margin: 0 auto;
     }
   }
+
+  @media (max-width: map-get($breakpoints, xs)) {
+    left: pixelToRem(80px);
+    input {
+      width: pixelToRem(200px);
+    }
+  }
 }

@@ -11,7 +11,7 @@ import ItemDetailContainer from './../../../item/ItemDetailContainer';
 import CategoryPath from './../../../category/CategoryPath';
 import styleApp from './../../styles/_App.scss';
 
-import { searchItemsRequested } from './../../../item/ItemActions';
+import { searchItemsRequested, fetchItem } from './../../../item/ItemActions';
 
 class Main extends React.Component {
   constructor(props) {
@@ -33,9 +33,14 @@ class Main extends React.Component {
     e.preventDefault();
 
     if (this.state.searchText) {
-      this.props.setUri(this.state.searchText);
+      this.props.setUri('/items?search=' + this.state.searchText);
       this.props.searchItems(this.state.searchText);
     }
+  }
+
+  handleOnItemClick(itemId) {
+    this.props.setUri('/items/' + itemId);
+    this.props.fetchItem(itemId);
   }
 
   render() {
@@ -51,10 +56,16 @@ class Main extends React.Component {
           <Route exact path='/' component={ Home }/>
           <Route exact path='/items' render={ (props) =>
             <ItemListContainer
-              items={ this.props.items } {...props}
+              items={ this.props.items }
+              onItemClick={ this.handleOnItemClick.bind(this) }
+              {...props}
             />
           }/>
-          <Route exact path='/items/:itemId' component={ ItemDetailContainer }/>
+          <Route exact path='/items/:itemId' render={ (props) =>
+            <ItemDetailContainer
+              item={ this.props.item } {...props}
+            />
+          }/>
         </div>
       </div>
     );
@@ -65,20 +76,23 @@ Main.propTypes = {
   setUri: PropTypes.func,
   searchItems: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.object),
+  item: PropTypes.object,
   categories: PropTypes.arrayOf(PropTypes.string)
 }
 
 const mapStateToProps = (state) => {
   return {
     items: state.itemListReducer.items,
-    categories: state.itemListReducer.categories
+    categories: state.itemListReducer.categories,
+    item: state.itemListReducer.item
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUri: (searchText) => dispatch(push('/items?search=' + searchText)),
-    searchItems: (searchText) => dispatch(searchItemsRequested(searchText))
+    setUri: (uri) => dispatch(push(uri)),
+    searchItems: (searchText) => dispatch(searchItemsRequested(searchText)),
+    fetchItem: (itemId) => dispatch(fetchItem(itemId))
   }
 }
 

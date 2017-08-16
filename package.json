@@ -1,13 +1,16 @@
 {
   "name": "meli-app-demo",
   "version": "0.0.1",
-  "description": "A PWA react base app demo for meli.",
+  "description": "Example react demo for meli.",
   "main": "index.js",
   "repository": "git+https://github.com/jesusfar/meli-app-demo",
   "author": "Jesus Farfan <jesu.farfan23@gmail.com>",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
-    "start:dev": "webpack-dev-server --hot --progress --host 0.0.0.0 --port 8000 --env.base=client"
+    "start": "npm run start:dev",
+    "start:dev": "webpack-dev-server --hot --progress --host 0.0.0.0 --port 8000 --env.base=client",
+    "build:server": "webpack --env.base=server",
+    "build:client": "webpack --env.base=client"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -18,6 +21,7 @@
     "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-intl": "^2.3.0",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
