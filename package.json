@@ -1,16 +1,14 @@
 {
   "name": "meli-app-demo",
   "version": "0.0.1",
-  "description": "A PWA react base app demo for meli.",
+  "description": "Example react demo for meli.",
   "main": "index.js",
   "repository": "git+https://github.com/jesusfar/meli-app-demo",
   "author": "Jesus Farfan <jesu.farfan23@gmail.com>",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
-    "start": "[[ $NODE_ENV == 'production' ]] && yarn run start:prod || yarn run start:dev",
-    "start:prod": "yarn run build && node build/server.js",
+    "start": "npm run start:dev",
     "start:dev": "webpack-dev-server --hot --progress --host 0.0.0.0 --port 8000 --env.base=client",
-    "build": "yarn run build:client && yarn run build:server",
     "build:server": "webpack --env.base=server",
     "build:client": "webpack --env.base=client"
   },

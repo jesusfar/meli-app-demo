@@ -19,14 +19,14 @@ export function itemListReducer(state = initialState, action) {
   switch (action.type) {
     case SEARCH_ITEMS_REQUESTED:
       return {
-        ...state,
-        fetchInProcess: true
+        ...state
       };
     case FETCH_ITEMS_SUCCESS:
       return {
         ...state,
         items: action.payload.items,
-        categories: action.payload.categories
+        categories: action.payload.categories,
+        error: null
       }
     case FETCH_ITEMS_FAILS:
       return {
@@ -39,13 +39,13 @@ export function itemListReducer(state = initialState, action) {
       };
     case FETCH_ITEM:
       return {
-        ...state,
-        fetchInProcess: true
+        ...state
       };
     case FETCH_ITEM_SUCCESS:
       return {
         ...state,
-        item: action.payload.item
+        item: action.payload.item,
+        error: null
       };
     case FETCH_ITEM_FAILS:
       return {
